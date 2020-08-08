@@ -18,9 +18,11 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.example.lifeofnote.R;
 import com.example.lifeofnote.adapter.CreatePayAdapter;
 import com.example.lifeofnote.base.APP;
+import com.example.lifeofnote.callback.DialogInputCallback;
 import com.example.lifeofnote.databinding.ActivityCreateBinding;
 import com.example.lifeofnote.db.type.MoneyTypeEntity;
 import com.example.lifeofnote.entity.CratePayEntity;
+import com.example.lifeofnote.ui.width.InputDialog;
 import com.example.lifeofnote.utils.DateTimeUtils;
 import com.example.lifeofnote.utils.StatusBarUtil;
 
@@ -36,6 +38,9 @@ public class CreateActivity extends AppCompatActivity {
     private CreatePayAdapter adapter;
     private List<CratePayEntity> datas;
     private int lastPosition = 0;
+
+    private InputDialog inputDialog;
+    private String userTip = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,7 @@ public class CreateActivity extends AppCompatActivity {
         isPay = getIntent().getBooleanExtra("isPay", false);
         binding.clChangeTime.setOnClickListener(mClick);
         binding.ivClose.setOnClickListener(mClick);
-
+        binding.tvAddTip.setOnClickListener(mClick);
         if (isPay) {
             viewModel.getAllMoneyTypes(-1).observe(this, new Observer<List<MoneyTypeEntity>>() {
                 @Override
@@ -156,6 +161,18 @@ public class CreateActivity extends AppCompatActivity {
                 case R.id.cl_change_time:
                     showDatePicker();
                     break;
+                case R.id.tv_add_tip:
+                    if (inputDialog == null) {
+                        inputDialog = new InputDialog(CreateActivity.this);
+                        inputDialog.setDialogInputCallback(new DialogInputCallback() {
+                            @Override
+                            public void inputCallBack(String inputValue) {
+                                userTip = inputValue;
+                            }
+                        });
+                    }
+                    inputDialog.showDialog();
+                    break;
             }
         }
     };
@@ -178,35 +195,35 @@ public class CreateActivity extends AppCompatActivity {
     private void setDatas(List<MoneyTypeEntity> moneyTypeEntities) {
         datas.add(new CratePayEntity(R.drawable.icon_pay_1, moneyTypeEntities.get(0).getName(), true, R.drawable.icon_pay_1a));
         datas.add(new CratePayEntity(R.drawable.icon_pay_2, moneyTypeEntities.get(1).getName(), false, R.drawable.icon_pay_2a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_3, moneyTypeEntities.get(2).getName(), false,R.drawable.icon_pay_3a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_4, moneyTypeEntities.get(3).getName(), false,R.drawable.icon_pay_4a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_5, moneyTypeEntities.get(4).getName(), false,R.drawable.icon_pay_5a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_6, moneyTypeEntities.get(5).getName(), false,R.drawable.icon_pay_6a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_7, moneyTypeEntities.get(6).getName(), false,R.drawable.icon_pay_7a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_8, moneyTypeEntities.get(7).getName(), false,R.drawable.icon_pay_8a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_9, moneyTypeEntities.get(8).getName(), false,R.drawable.icon_pay_9a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_10, moneyTypeEntities.get(9).getName(), false,R.drawable.icon_pay_10a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_11, moneyTypeEntities.get(10).getName(), false,R.drawable.icon_pay_11a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_12, moneyTypeEntities.get(11).getName(), false,R.drawable.icon_pay_12a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_13, moneyTypeEntities.get(12).getName(), false,R.drawable.icon_pay_13a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_14, moneyTypeEntities.get(13).getName(), false,R.drawable.icon_pay_14a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_15, moneyTypeEntities.get(14).getName(), false,R.drawable.icon_pay_15a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_16, moneyTypeEntities.get(15).getName(), false,R.drawable.icon_pay_16a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_17, moneyTypeEntities.get(16).getName(), false,R.drawable.icon_pay_17a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_18, moneyTypeEntities.get(17).getName(), false,R.drawable.icon_pay_18a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_19, moneyTypeEntities.get(18).getName(), false,R.drawable.icon_pay_19a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_3, moneyTypeEntities.get(2).getName(), false, R.drawable.icon_pay_3a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_4, moneyTypeEntities.get(3).getName(), false, R.drawable.icon_pay_4a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_5, moneyTypeEntities.get(4).getName(), false, R.drawable.icon_pay_5a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_6, moneyTypeEntities.get(5).getName(), false, R.drawable.icon_pay_6a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_7, moneyTypeEntities.get(6).getName(), false, R.drawable.icon_pay_7a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_8, moneyTypeEntities.get(7).getName(), false, R.drawable.icon_pay_8a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_9, moneyTypeEntities.get(8).getName(), false, R.drawable.icon_pay_9a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_10, moneyTypeEntities.get(9).getName(), false, R.drawable.icon_pay_10a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_11, moneyTypeEntities.get(10).getName(), false, R.drawable.icon_pay_11a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_12, moneyTypeEntities.get(11).getName(), false, R.drawable.icon_pay_12a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_13, moneyTypeEntities.get(12).getName(), false, R.drawable.icon_pay_13a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_14, moneyTypeEntities.get(13).getName(), false, R.drawable.icon_pay_14a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_15, moneyTypeEntities.get(14).getName(), false, R.drawable.icon_pay_15a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_16, moneyTypeEntities.get(15).getName(), false, R.drawable.icon_pay_16a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_17, moneyTypeEntities.get(16).getName(), false, R.drawable.icon_pay_17a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_18, moneyTypeEntities.get(17).getName(), false, R.drawable.icon_pay_18a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_19, moneyTypeEntities.get(18).getName(), false, R.drawable.icon_pay_19a));
     }
 
     private void setInComeData(List<MoneyTypeEntity> moneyTypeEntities) {
         datas.add(new CratePayEntity(R.drawable.icon_income_a, moneyTypeEntities.get(0).getName(), true, R.drawable.icon_income_1a));
         datas.add(new CratePayEntity(R.drawable.icon_income_2, moneyTypeEntities.get(1).getName(), false, R.drawable.icon_income_2a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_4, moneyTypeEntities.get(2).getName(), false,R.drawable.icon_income_3a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_3, moneyTypeEntities.get(3).getName(), false,R.drawable.icon_income_4a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_5, moneyTypeEntities.get(4).getName(), false,R.drawable.icon_income_5a));
-        datas.add(new CratePayEntity(R.drawable.item_income_6, moneyTypeEntities.get(5).getName(), false,R.drawable.icon_income_6a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_16, moneyTypeEntities.get(6).getName(), false,R.drawable.icon_pay_16a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_17, moneyTypeEntities.get(7).getName(), false,R.drawable.icon_pay_17a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_7, moneyTypeEntities.get(8).getName(), false,R.drawable.icon_income_7a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_8, moneyTypeEntities.get(9).getName(), false,R.drawable.icon_income_8a));
+        datas.add(new CratePayEntity(R.drawable.icon_income_4, moneyTypeEntities.get(2).getName(), false, R.drawable.icon_income_3a));
+        datas.add(new CratePayEntity(R.drawable.icon_income_3, moneyTypeEntities.get(3).getName(), false, R.drawable.icon_income_4a));
+        datas.add(new CratePayEntity(R.drawable.icon_income_5, moneyTypeEntities.get(4).getName(), false, R.drawable.icon_income_5a));
+        datas.add(new CratePayEntity(R.drawable.item_income_6, moneyTypeEntities.get(5).getName(), false, R.drawable.icon_income_6a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_16, moneyTypeEntities.get(6).getName(), false, R.drawable.icon_pay_16a));
+        datas.add(new CratePayEntity(R.drawable.icon_pay_17, moneyTypeEntities.get(7).getName(), false, R.drawable.icon_pay_17a));
+        datas.add(new CratePayEntity(R.drawable.icon_income_7, moneyTypeEntities.get(8).getName(), false, R.drawable.icon_income_7a));
+        datas.add(new CratePayEntity(R.drawable.icon_income_8, moneyTypeEntities.get(9).getName(), false, R.drawable.icon_income_8a));
     }
 }
