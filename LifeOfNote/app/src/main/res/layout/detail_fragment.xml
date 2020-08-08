@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable
+            name="dateilViewModel"
+            type="com.example.lifeofnote.ui.home.detail.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.detail.DetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_select"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_180dp"
+            android:background="@color/colorPrimary"
+            android:paddingTop="@dimen/distance_38dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="随记"
+                android:textColor="#fff"
+                android:textSize="@dimen/distance_20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_select_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_12dp"
+                android:layout_marginTop="@dimen/distance_12dp"
+                android:background="@drawable/detail_tyep_bg"
+                android:paddingLeft="@dimen/distance_8dp"
+                android:paddingTop="@dimen/distance_6dp"
+                android:paddingRight="@dimen/distance_8dp"
+                android:paddingBottom="@dimen/distance_6dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+                <TextView
+                    android:id="@+id/tv_curr_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全部类型"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_12dp"
+                    android:text="|"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/tv_curr_type"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="@dimen/distance_18dp"
+                    android:layout_height="@dimen/distance_18dp"
+                    android:layout_marginLeft="@dimen/distance_6dp"
+                    android:background="@drawable/ic_baseline_apps_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/tv_des"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_select_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_24dp"
+                app:layout_constraintLeft_toLeftOf="@id/cl_select_type"
+                app:layout_constraintTop_toBottomOf="@id/cl_select_type">
+
+                <TextView
+                    android:id="@+id/tv_select_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/distance_16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_select_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_6dp"
+                    android:background="@drawable/ic_baseline_details_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/tv_select_time"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_all_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_6dp"
+                    android:text="支￥0"
+                    android:textColor="#95FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/iv_select_time"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_all_getted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_6dp"
+                    android:text="收￥0"
+                    android:textColor="#95FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/tv_all_pay"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#EDEDED"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_select">
+
+            <LinearLayout
+                android:id="@+id/ll_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/distance_12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-----------------------" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="暂无收支记录" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-----------------------" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_all_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_pay"
+            android:layout_width="@dimen/distance_50dp"
+            android:layout_height="@dimen/distance_50dp"
+            android:background="@drawable/icon_pay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/distance_40dp"
+            android:layout_marginRight="@dimen/distance_20dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_getted"
+            android:layout_width="@dimen/distance_50dp"
+            android:layout_height="@dimen/distance_50dp"
+            android:background="@drawable/icon_income"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/distance_40dp"
+            android:layout_marginRight="@dimen/distance_20dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_create"
+            android:layout_width="@dimen/distance_50dp"
+            android:layout_height="@dimen/distance_50dp"
+            android:background="@drawable/icon_create"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/distance_40dp"
+            android:layout_marginRight="@dimen/distance_20dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

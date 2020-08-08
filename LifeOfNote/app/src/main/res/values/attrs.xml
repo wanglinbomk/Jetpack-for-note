@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StatusBarHeightView">
+        <attr name="use_type" format="integer">
+            <enum name="use_height" value="0" />
+            <enum name="use_padding_top" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ScalableIndicator">
+        <attr name="scalable_line_color" format="color" />
+        <attr name="scalable_tab_bottom_padding" format="dimension" />
+        <attr name="scalable_divider_width" format="dimension" />
+        <attr name="scalable_line_height" format="dimension" />
+        <attr name="scalable_line_width" format="dimension" />
+        <attr name="scalable_text_size" format="dimension" />
+        <attr name="scalable_text_selected_color" format="color" />
+        <attr name="scalable_text_unselected_color" format="color" />
+        <attr name="scalable_base_scale" format="float" />
+        <attr name="scalable_scale_enabled" format="boolean" />
+        <attr name="scalable_line_style" format="enum">
+            <enum name="matchTabWidth" value="0" />
+            <enum name="userDefined" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="countdown">
+        <attr name="color_bg" format="color" />
+        <attr name="color_text" format="color" />
+        <attr name="text_sizes" format="integer" />
+        <attr name="setDrawable" format="reference" />
+        <attr name="setDrawable_sub" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="HIndicators">
+        <attr name="hi_bgColor" format="color"/>
+        <attr name="hi_indicatorColor" format="color"/>
+    </declare-styleable>
+
+</resources>

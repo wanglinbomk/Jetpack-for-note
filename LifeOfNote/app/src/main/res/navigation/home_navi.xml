@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navi"
+    app:startDestination="@id/detailFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.wanglinbo.mk.ui.home.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.wanglinbo.mk.ui.home.statistics.StatisticsFragment"
+        android:label="statistics_fragment"
+        tools:layout="@layout/statistics_fragment" />
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.wanglinbo.mk.ui.home.mine.MineFragment"
+        android:label="mine_fragment"
+        tools:layout="@layout/mine_fragment" />
+</navigation>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="timeSelect"
+            type="com.example.lifeofnote.db.time.SelectTimeEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cl_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{timeSelect.showing?@drawable/bg_item_select_greed:@drawable/bg_item_select_while}"
+        android:paddingTop="@dimen/distance_6dp"
+        android:paddingBottom="@dimen/distance_6dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{timeSelect.name}"
+            android:textColor="@{timeSelect.showing?@color/colorWhile:@color/colorNormalText}"
+            android:textSize="@dimen/distance_16dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

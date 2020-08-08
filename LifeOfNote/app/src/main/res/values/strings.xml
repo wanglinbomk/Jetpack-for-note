@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">随记人生</string>
+    <string name="fuck">&#xe618;</string>
+    <string name="pay">支出</string>
+    <string name="gaid">收入</string>
+</resources>
