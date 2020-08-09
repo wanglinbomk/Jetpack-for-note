@@ -66,7 +66,10 @@ public class CreateActivity extends AppCompatActivity {
     }
 
     private void changeViewsStyle() {
-
+        binding.btConfig.setBackgroundColor(getResources().getColor(R.color.colorIncomeBg));
+        binding.tvAddTip.setTextColor(getResources().getColor(R.color.colorIncomeBg));
+        binding.clChangeTime.setBackground(getDrawable(R.drawable.bg_tv_today_change));
+        binding.ibCancel.setBackground(getDrawable(R.drawable.icon_clear_change));
     }
 
     private void initDatas() {
@@ -115,7 +118,7 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<CratePayEntity> cratePayEntities) {
                 datas = cratePayEntities;
-                adapter = new CreatePayAdapter(R.layout.item_pay_type, datas);
+                adapter = new CreatePayAdapter(R.layout.item_pay_type, datas, isPay);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(APP.get());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 binding.rvType.setLayoutManager(linearLayoutManager);
@@ -146,13 +149,13 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<CratePayEntity> cratePayEntities) {
                 datas = cratePayEntities;
-                adapter = new CreatePayAdapter(R.layout.item_pay_type, datas);
+                adapter = new CreatePayAdapter(R.layout.item_pay_type, datas, isPay);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(APP.get());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 binding.rvType.setLayoutManager(linearLayoutManager);
                 binding.rvType.setAdapter(adapter);
                 binding.hiDicators.bindRecyclerView(binding.rvType);
-                binding.hiDicators.setIndicatorColor(Color.parseColor("#51BC83"));
+                binding.hiDicators.setIndicatorColor(Color.parseColor("#e8b854"));
                 binding.hiDicators.setBgColor(Color.parseColor("#E6E6E6"));
 
                 adapter.addChildClickViewIds(R.id.cl_all_father);
