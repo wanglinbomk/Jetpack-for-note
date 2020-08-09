@@ -26,7 +26,6 @@ import com.example.lifeofnote.ui.width.InputDialog;
 import com.example.lifeofnote.utils.DateTimeUtils;
 import com.example.lifeofnote.utils.StatusBarUtil;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -61,8 +60,13 @@ public class CreateActivity extends AppCompatActivity {
             binding.tvTitle.setText(getResources().getString(R.string.pay));
         } else {
             binding.tvTitle.setText(getResources().getString(R.string.gaid));
+            changeViewsStyle();
         }
         binding.tvToday.setText(DateTimeUtils.getCnNotYearDate());
+    }
+
+    private void changeViewsStyle() {
+
     }
 
     private void initDatas() {
@@ -71,75 +75,99 @@ public class CreateActivity extends AppCompatActivity {
         binding.ivClose.setOnClickListener(mClick);
         binding.tvAddTip.setOnClickListener(mClick);
         if (isPay) {
-            viewModel.getAllMoneyTypes(-1).observe(this, new Observer<List<MoneyTypeEntity>>() {
-                @Override
-                public void onChanged(List<MoneyTypeEntity> moneyTypeEntities) {
-                    if (adapter == null) {
-                        datas = new ArrayList<>();
-                        setDatas(moneyTypeEntities);
-                        adapter = new CreatePayAdapter(R.layout.item_pay_type, datas);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(APP.get());
-                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                        binding.rvType.setLayoutManager(linearLayoutManager);
-                        binding.rvType.setAdapter(adapter);
-                        binding.hiDicators.bindRecyclerView(binding.rvType);
-                        binding.hiDicators.setIndicatorColor(Color.parseColor("#51BC83"));
-                        binding.hiDicators.setBgColor(Color.parseColor("#E6E6E6"));
-
-                        adapter.addChildClickViewIds(R.id.cl_all_father);
-                        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
-                            @Override
-                            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-                                if (position != lastPosition) {
-                                    datas.get(lastPosition).setSelect(false);
-                                    datas.get(position).setSelect(true);
-                                }
-                                adapter.notifyItemChanged(lastPosition);
-                                adapter.notifyItemChanged(position);
-                                lastPosition = position;
-                            }
-                        });
-                    }
-                }
-            });
+            observePay();
         } else {
-            viewModel.getAllMoneyTypes(1).observe(this, new Observer<List<MoneyTypeEntity>>() {
-                @Override
-                public void onChanged(List<MoneyTypeEntity> moneyTypeEntities) {
-                    if (adapter == null) {
-                        datas = new ArrayList<>();
-                        setInComeData(moneyTypeEntities);
-                        adapter = new CreatePayAdapter(R.layout.item_pay_type, datas);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(APP.get());
-                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                        binding.rvType.setLayoutManager(linearLayoutManager);
-                        binding.rvType.setAdapter(adapter);
-                        binding.hiDicators.bindRecyclerView(binding.rvType);
-                        binding.hiDicators.setIndicatorColor(Color.parseColor("#51BC83"));
-                        binding.hiDicators.setBgColor(Color.parseColor("#E6E6E6"));
-
-                        adapter.addChildClickViewIds(R.id.cl_all_father);
-                        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
-                            @Override
-                            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-                                if (position != lastPosition) {
-                                    datas.get(lastPosition).setSelect(false);
-                                    datas.get(position).setSelect(true);
-                                }
-                                adapter.notifyItemChanged(lastPosition);
-                                adapter.notifyItemChanged(position);
-                                lastPosition = position;
-                            }
-                        });
-                    }
-                }
-            });
+            observeGet();
         }
 
         viewModel.getNumberSum().observe(this, new Observer<StringBuffer>() {
             @Override
             public void onChanged(StringBuffer stringBuffer) {
                 binding.etInput.setText(stringBuffer.toString());
+            }
+        });
+    }
+
+    private void observeGet() {
+        viewModel.getAllMoneyTypes(1).observe(this, new Observer<List<MoneyTypeEntity>>() {
+            @Override
+            public void onChanged(List<MoneyTypeEntity> moneyTypeEntities) {
+                if (adapter == null) {
+                    setIncomeAdapter(moneyTypeEntities);
+                }
+            }
+        });
+    }
+
+    private void observePay() {
+        viewModel.getAllMoneyTypes(-1).observe(this, new Observer<List<MoneyTypeEntity>>() {
+            @Override
+            public void onChanged(List<MoneyTypeEntity> moneyTypeEntities) {
+                if (adapter == null) {
+                    loadIncomeData(moneyTypeEntities);
+                }
+            }
+        });
+    }
+
+    private void loadIncomeData(List<MoneyTypeEntity> moneyTypeEntities) {
+        viewModel.getIncomeData(moneyTypeEntities).observe(CreateActivity.this, new Observer<List<CratePayEntity>>() {
+            @Override
+            public void onChanged(List<CratePayEntity> cratePayEntities) {
+                datas = cratePayEntities;
+                adapter = new CreatePayAdapter(R.layout.item_pay_type, datas);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(APP.get());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                binding.rvType.setLayoutManager(linearLayoutManager);
+                binding.rvType.setAdapter(adapter);
+                binding.hiDicators.bindRecyclerView(binding.rvType);
+                binding.hiDicators.setIndicatorColor(Color.parseColor("#51BC83"));
+                binding.hiDicators.setBgColor(Color.parseColor("#E6E6E6"));
+
+                adapter.addChildClickViewIds(R.id.cl_all_father);
+                adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                        if (position != lastPosition) {
+                            datas.get(lastPosition).setSelect(false);
+                            datas.get(position).setSelect(true);
+                        }
+                        adapter.notifyItemChanged(lastPosition);
+                        adapter.notifyItemChanged(position);
+                        lastPosition = position;
+                    }
+                });
+            }
+        });
+    }
+
+    private void setIncomeAdapter(List<MoneyTypeEntity> moneyTypeEntities) {
+        viewModel.getMoneyTypeEntities(moneyTypeEntities).observe(CreateActivity.this, new Observer<List<CratePayEntity>>() {
+            @Override
+            public void onChanged(List<CratePayEntity> cratePayEntities) {
+                datas = cratePayEntities;
+                adapter = new CreatePayAdapter(R.layout.item_pay_type, datas);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(APP.get());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                binding.rvType.setLayoutManager(linearLayoutManager);
+                binding.rvType.setAdapter(adapter);
+                binding.hiDicators.bindRecyclerView(binding.rvType);
+                binding.hiDicators.setIndicatorColor(Color.parseColor("#51BC83"));
+                binding.hiDicators.setBgColor(Color.parseColor("#E6E6E6"));
+
+                adapter.addChildClickViewIds(R.id.cl_all_father);
+                adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                        if (position != lastPosition) {
+                            datas.get(lastPosition).setSelect(false);
+                            datas.get(position).setSelect(true);
+                        }
+                        adapter.notifyItemChanged(lastPosition);
+                        adapter.notifyItemChanged(position);
+                        lastPosition = position;
+                    }
+                });
             }
         });
     }
@@ -168,6 +196,8 @@ public class CreateActivity extends AppCompatActivity {
                             @Override
                             public void inputCallBack(String inputValue) {
                                 userTip = inputValue;
+                                binding.tvTipMessage.setText(userTip);
+                                binding.tvAddTip.setText("修改");
                             }
                         });
                     }
@@ -190,40 +220,5 @@ public class CreateActivity extends AppCompatActivity {
             }
         }, mYear, mMonth, mDay);
         dialog.show();
-    }
-
-    private void setDatas(List<MoneyTypeEntity> moneyTypeEntities) {
-        datas.add(new CratePayEntity(R.drawable.icon_pay_1, moneyTypeEntities.get(0).getName(), true, R.drawable.icon_pay_1a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_2, moneyTypeEntities.get(1).getName(), false, R.drawable.icon_pay_2a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_3, moneyTypeEntities.get(2).getName(), false, R.drawable.icon_pay_3a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_4, moneyTypeEntities.get(3).getName(), false, R.drawable.icon_pay_4a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_5, moneyTypeEntities.get(4).getName(), false, R.drawable.icon_pay_5a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_6, moneyTypeEntities.get(5).getName(), false, R.drawable.icon_pay_6a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_7, moneyTypeEntities.get(6).getName(), false, R.drawable.icon_pay_7a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_8, moneyTypeEntities.get(7).getName(), false, R.drawable.icon_pay_8a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_9, moneyTypeEntities.get(8).getName(), false, R.drawable.icon_pay_9a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_10, moneyTypeEntities.get(9).getName(), false, R.drawable.icon_pay_10a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_11, moneyTypeEntities.get(10).getName(), false, R.drawable.icon_pay_11a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_12, moneyTypeEntities.get(11).getName(), false, R.drawable.icon_pay_12a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_13, moneyTypeEntities.get(12).getName(), false, R.drawable.icon_pay_13a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_14, moneyTypeEntities.get(13).getName(), false, R.drawable.icon_pay_14a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_15, moneyTypeEntities.get(14).getName(), false, R.drawable.icon_pay_15a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_16, moneyTypeEntities.get(15).getName(), false, R.drawable.icon_pay_16a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_17, moneyTypeEntities.get(16).getName(), false, R.drawable.icon_pay_17a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_18, moneyTypeEntities.get(17).getName(), false, R.drawable.icon_pay_18a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_19, moneyTypeEntities.get(18).getName(), false, R.drawable.icon_pay_19a));
-    }
-
-    private void setInComeData(List<MoneyTypeEntity> moneyTypeEntities) {
-        datas.add(new CratePayEntity(R.drawable.icon_income_a, moneyTypeEntities.get(0).getName(), true, R.drawable.icon_income_1a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_2, moneyTypeEntities.get(1).getName(), false, R.drawable.icon_income_2a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_4, moneyTypeEntities.get(2).getName(), false, R.drawable.icon_income_3a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_3, moneyTypeEntities.get(3).getName(), false, R.drawable.icon_income_4a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_5, moneyTypeEntities.get(4).getName(), false, R.drawable.icon_income_5a));
-        datas.add(new CratePayEntity(R.drawable.item_income_6, moneyTypeEntities.get(5).getName(), false, R.drawable.icon_income_6a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_16, moneyTypeEntities.get(6).getName(), false, R.drawable.icon_pay_16a));
-        datas.add(new CratePayEntity(R.drawable.icon_pay_17, moneyTypeEntities.get(7).getName(), false, R.drawable.icon_pay_17a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_7, moneyTypeEntities.get(8).getName(), false, R.drawable.icon_income_7a));
-        datas.add(new CratePayEntity(R.drawable.icon_income_8, moneyTypeEntities.get(9).getName(), false, R.drawable.icon_income_8a));
     }
 }

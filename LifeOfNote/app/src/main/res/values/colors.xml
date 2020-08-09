@@ -5,6 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhile">#FFFFFF</color>
     <color name="colorNormalText">#444444</color>
+    <color name="colorIncomeBg">#e8b854</color>
     <color name="colorDefault">#ededed</color>
     <color name="colorBlack">#000000</color>
     <color name="tou_min">#00000000</color>

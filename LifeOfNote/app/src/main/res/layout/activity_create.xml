@@ -120,6 +120,17 @@
                 app:layout_constraintTop_toTopOf="@id/tv_money_des"
                 app:layout_goneMarginLeft="@dimen/distance_60dp" />
 
+            <TextView
+                android:id="@+id/ib_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/distance_12dp"
+                android:background="@drawable/icon_clear_greed"
+                android:onClick="@{createViewModel::clearAll}"
+                app:layout_constraintBottom_toBottomOf="@id/et_input"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_input" />
+
             <View
                 android:id="@+id/v_line_two"
                 android:layout_width="wrap_content"
@@ -153,11 +164,23 @@
                 android:id="@+id/tv_add_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/distance_20dp"
+                android:layout_marginLeft="@dimen/distance_10dp"
                 android:layout_marginTop="@dimen/distance_20dp"
                 android:text="添加备注"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/distance_18dp"
+                android:textSize="@dimen/distance_16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/tv_tip_message"
+                app:layout_constraintTop_toBottomOf="@id/hi_dicators" />
+
+            <TextView
+                android:id="@+id/tv_tip_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_20dp"
+                android:layout_marginTop="@dimen/distance_20dp"
+                android:textColor="#000"
+                android:textSize="@dimen/distance_16dp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/hi_dicators" />
@@ -346,17 +369,17 @@
 
         <Button
             android:id="@+id/bt_config"
-            android:layout_width="83dp"
-            android:layout_height="188dp"
+            android:layout_width="82dp"
+            android:layout_height="184dp"
             android:background="@drawable/bg_bt_config"
             android:text="确定"
             android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintHorizontal_bias="0.965"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.923" />
+            app:layout_constraintVertical_bias="0.88" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

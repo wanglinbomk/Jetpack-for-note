@@ -92,7 +92,7 @@ public class InputDialog extends Dialog {
                     tvConfig.setClickable(true);
                     tvConfig.setTextColor(getContext().getResources().getColor(R.color.tv_config_100));
                 }
-                tvInputGropress.setText(editable.toString().length() + "/30");
+                tvInputGropress.setText(editable.toString().length() + "/20");
             }
         });
     }

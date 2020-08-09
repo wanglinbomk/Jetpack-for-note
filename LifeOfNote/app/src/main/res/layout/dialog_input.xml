@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/distance_20dp"
         android:layout_marginRight="@dimen/distance_20dp"
         android:layout_marginBottom="@dimen/distance_20dp"
-        android:maxLength="30"
+        android:maxLength="20"
         android:textColor="#000"
         app:layout_constraintBottom_toTopOf="@id/tv_input_progress"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/distance_32dp"
         android:layout_marginBottom="@dimen/distance_40dp"
-        android:text="0/30"
+        android:text="0/20"
         android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
