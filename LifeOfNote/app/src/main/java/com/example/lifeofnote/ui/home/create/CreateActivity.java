@@ -77,6 +77,7 @@ public class CreateActivity extends AppCompatActivity {
         binding.clChangeTime.setOnClickListener(mClick);
         binding.ivClose.setOnClickListener(mClick);
         binding.tvAddTip.setOnClickListener(mClick);
+        binding.btConfig.setOnClickListener(mClick);
         if (isPay) {
             observePay();
         } else {
@@ -205,6 +206,9 @@ public class CreateActivity extends AppCompatActivity {
                         });
                     }
                     inputDialog.showDialog();
+                    break;
+                case R.id.bt_config:
+
                     break;
             }
         }

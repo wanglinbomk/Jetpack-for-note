@@ -19,6 +19,5 @@ public interface MoneyTypeDao {
     @Query("SELECT * FROM MONEYTYPEENTITY ORDER BY ID ASC")
     LiveData<List<MoneyTypeEntity>> getAllTypeList();
 
-
 }
 
