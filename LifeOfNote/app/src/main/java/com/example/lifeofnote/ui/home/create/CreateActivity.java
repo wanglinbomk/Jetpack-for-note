@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
@@ -20,6 +22,7 @@ import com.example.lifeofnote.adapter.CreatePayAdapter;
 import com.example.lifeofnote.base.APP;
 import com.example.lifeofnote.callback.DialogInputCallback;
 import com.example.lifeofnote.databinding.ActivityCreateBinding;
+import com.example.lifeofnote.db.create.CreateEntity;
 import com.example.lifeofnote.db.type.MoneyTypeEntity;
 import com.example.lifeofnote.entity.CratePayEntity;
 import com.example.lifeofnote.ui.width.InputDialog;
@@ -40,6 +43,7 @@ public class CreateActivity extends AppCompatActivity {
 
     private InputDialog inputDialog;
     private String userTip = "";
+    private String detailTime = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,22 +212,31 @@ public class CreateActivity extends AppCompatActivity {
                     inputDialog.showDialog();
                     break;
                 case R.id.bt_config:
-
+                    CreateEntity createEntity = new CreateEntity(binding.tvToday.getText().toString(),detailTime,isPay?-1:1,
+                            Double.valueOf(binding.etInput.getText().toString()),adapter.getItem(lastPosition).getName(),userTip);
                     break;
             }
         }
     };
 
     private void showDatePicker() {
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH);
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        final int mHour = calendar.get(Calendar.HOUR_OF_DAY);
+        final int mMin = calendar.get(Calendar.MINUTE);
 
         DatePickerDialog dialog = new DatePickerDialog(CreateActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 binding.tvToday.setText(i1 + 1 + "月" + i2 + "日");
+                TimePickerDialog timePickerDialog = new TimePickerDialog(CreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        detailTime = i + " : " + i1;
+                    }
+                }, mHour, mMin, true);
             }
         }, mYear, mMonth, mDay);
         dialog.show();
