@@ -187,7 +187,6 @@ public class CreateActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.iv_close:
                     finish();
-                    overridePendingTransition(0, 0);
                     break;
                 case R.id.cl_change_time:
                     showDatePicker();

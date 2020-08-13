@@ -13,18 +13,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/distance_100dp"
-        android:background="@color/colorDefault"
+        android:background="@color/colorDefaultDialog"
         tools:context=".ui.home.create.CreateActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/cl_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/activty_dialog_style_bg"
             android:paddingBottom="@dimen/distance_20dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/cl_bottom">
 
             <TextView
                 android:id="@+id/tv_title"
@@ -187,199 +186,202 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/bt_zero"
-            android:layout_width="184dp"
-            android:layout_height="52dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="0"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.071"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.942" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/distance_20dp"
+            android:paddingTop="@dimen/distance_20dp"
+            android:background="@color/colorDefault"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/bt_one"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="1"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.129" />
+            <Button
+                android:id="@+id/bt_three"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="3"
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.664"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_back"
+                app:layout_constraintVertical_bias="0.129" />
 
-        <Button
-            android:id="@+id/bt_four"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="4"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.404" />
 
-        <Button
-            android:id="@+id/bt_five"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="5"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.404" />
+            <Button
+                android:id="@+id/bt_one"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="1"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_back"
+                app:layout_constraintVertical_bias="0.129" />
 
-        <Button
-            android:id="@+id/bt_six"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="6"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.664"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.404" />
+            <Button
+                android:id="@+id/bt_four"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="4"
+                android:textColor="#000"
+                app:layout_constraintLeft_toLeftOf="@id/bt_seven"
+                app:layout_constraintBottom_toTopOf="@id/bt_seven"
+                android:layout_marginBottom="@dimen/distance_10dp"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintVertical_bias="0.404" />
 
-        <Button
-            android:id="@+id/bt_seven"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="7"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.675" />
+            <Button
+                android:id="@+id/bt_five"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="5"
+                android:textColor="#000"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_four"
+                app:layout_constraintLeft_toLeftOf="@id/bt_eight"
+                app:layout_constraintHorizontal_bias="0.356"
+                app:layout_constraintVertical_bias="0.404" />
 
-        <Button
-            android:id="@+id/bt_eight"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="8"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.679" />
+            <Button
+                android:id="@+id/bt_six"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="6"
+                android:textColor="#000"
+                app:layout_constraintHorizontal_bias="0.664"
+                app:layout_constraintLeft_toLeftOf="@id/bt_point"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_four"
+                app:layout_constraintVertical_bias="0.404" />
 
-        <Button
-            android:id="@+id/bt_nice"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="9"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.664"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.679" />
+            <Button
+                android:id="@+id/bt_seven"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="7"
+                android:textColor="#000"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintLeft_toLeftOf="@id/bt_zero"
+                app:layout_constraintBottom_toTopOf="@id/bt_zero"
+                android:layout_marginBottom="@dimen/distance_10dp"
+                app:layout_constraintBottom_toBottomOf="@id/bt_config"
+                app:layout_constraintVertical_bias="0.675" />
 
-        <Button
-            android:id="@+id/bt_point"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="."
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.664"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.945" />
+            <Button
+                android:id="@+id/bt_eight"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="8"
+                android:textColor="#000"
+                app:layout_constraintHorizontal_bias="0.356"
+                app:layout_constraintLeft_toLeftOf="@id/bt_two"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_seven"
+                app:layout_constraintVertical_bias="0.679" />
 
-        <Button
-            android:id="@+id/bt_two"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="2"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.129" />
+            <Button
+                android:id="@+id/bt_nice"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="9"
+                android:textColor="#000"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_seven"
+                app:layout_constraintLeft_toLeftOf="@id/bt_point"
+                app:layout_constraintHorizontal_bias="0.664"
+                app:layout_constraintVertical_bias="0.679" />
 
-        <Button
-            android:id="@+id/bt_three"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::justGo}"
-            android:text="3"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.664"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.129" />
+            <Button
+                android:id="@+id/bt_point"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="."
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.664"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                app:layout_constraintVertical_bias="0.945" />
 
-        <Button
-            android:id="@+id/bt_back"
-            android:layout_width="86dp"
-            android:layout_height="53dp"
-            android:background="@drawable/bg_bt_key"
-            android:onClick="@{createViewModel::deleteLast}"
-            android:text="C"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.965"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.126" />
+            <Button
+                android:id="@+id/bt_two"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="2"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.356"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/bt_back"
+                app:layout_constraintVertical_bias="0.129" />
 
-        <Button
-            android:id="@+id/bt_config"
-            android:layout_width="82dp"
-            android:layout_height="184dp"
-            android:background="@drawable/bg_bt_config"
-            android:text="确定"
-            android:textColor="#fff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.965"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.88" />
+
+            <Button
+                android:id="@+id/bt_back"
+                android:layout_width="86dp"
+                android:layout_height="53dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::deleteLast}"
+                android:text="C"
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.965"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/bt_config"
+                android:layout_marginBottom="@dimen/distance_10dp"
+                app:layout_constraintVertical_bias="0.126" />
+
+            <Button
+                android:id="@+id/bt_zero"
+                android:layout_width="184dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_bt_key"
+                android:onClick="@{createViewModel::justGo}"
+                android:text="0"
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.071"
+                app:layout_constraintLeft_toLeftOf="@id/bt_one"
+                app:layout_constraintVertical_bias="0.942" />
+
+            <Button
+                android:id="@+id/bt_config"
+                android:layout_width="82dp"
+                android:layout_height="179dp"
+                android:background="@drawable/bg_bt_config"
+                android:text="确定"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.965"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.88" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
