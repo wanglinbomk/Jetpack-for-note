@@ -2,10 +2,11 @@ package com.example.lifeofnote.db.create;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+
+import com.example.lifeofnote.base.APP;
 
 import java.util.List;
 
@@ -47,8 +48,13 @@ public class CreateRepository {
         @Override
         protected Void doInBackground(CreateEntity... createEntities) {
             createDao.insertCreate(createEntities);
-            Log.i("xyz","插入成功");
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(APP.get().getApplicationContext(),"插入成功！",Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -6,7 +6,6 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-
 @Database(entities = CreateEntity.class, version = 1, exportSchema = false)
 public abstract class CreateDatabase extends RoomDatabase {
 
@@ -14,7 +13,7 @@ public abstract class CreateDatabase extends RoomDatabase {
 
     static synchronized CreateDatabase getInstance(Context context){
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), CreateDatabase.class, "type_database")
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), CreateDatabase.class, "create_database")
                     .build();
         }
         return INSTANCE;
