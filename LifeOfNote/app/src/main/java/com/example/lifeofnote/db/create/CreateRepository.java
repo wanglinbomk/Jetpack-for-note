@@ -2,6 +2,7 @@ package com.example.lifeofnote.db.create;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -35,7 +36,7 @@ public class CreateRepository {
         new InsertCreateEntity(createDao).execute(createEntiy);
     }
 
-    static class InsertCreateEntity extends AsyncTask<CreateEntity, Void, Boolean>{
+    static class InsertCreateEntity extends AsyncTask<CreateEntity, Void, Void>{
 
         private CreateDao createDao;
 
@@ -44,9 +45,10 @@ public class CreateRepository {
         }
 
         @Override
-        protected Boolean doInBackground(CreateEntity... createEntities) {
+        protected Void doInBackground(CreateEntity... createEntities) {
             createDao.insertCreate(createEntities);
-            return true;
+            Log.i("xyz","插入成功");
+            return null;
         }
     }
 

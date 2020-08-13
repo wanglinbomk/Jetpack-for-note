@@ -12,6 +12,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.lifeofnote.R;
+import com.example.lifeofnote.db.create.CreateEntity;
+import com.example.lifeofnote.db.create.CreateRepository;
 import com.example.lifeofnote.db.type.MoneyTypeEntity;
 import com.example.lifeofnote.db.type.MoneyTypeRepository;
 import com.example.lifeofnote.entity.CratePayEntity;
@@ -22,6 +24,7 @@ import java.util.List;
 public class CreateViewModel extends AndroidViewModel {
 
     private MoneyTypeRepository moneyTypeRepository;
+    private CreateRepository createRepository;
     private MutableLiveData<StringBuffer> numberSum;
     private MutableLiveData<List<CratePayEntity>> getData;
     private MutableLiveData<List<CratePayEntity>> incomeData;
@@ -52,6 +55,11 @@ public class CreateViewModel extends AndroidViewModel {
     public CreateViewModel(@NonNull Application application) {
         super(application);
         moneyTypeRepository = new MoneyTypeRepository(getApplication());
+        createRepository = new CreateRepository(getApplication());
+    }
+
+    public void insertCreateEntity(CreateEntity createEntity){
+      createRepository.insertCreateEntity(createEntity);
     }
 
     public LiveData<List<MoneyTypeEntity>> getAllMoneyTypes(int type) {

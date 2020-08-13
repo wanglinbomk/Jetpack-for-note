@@ -212,8 +212,9 @@ public class CreateActivity extends AppCompatActivity {
                     inputDialog.showDialog();
                     break;
                 case R.id.bt_config:
-                    CreateEntity createEntity = new CreateEntity(binding.tvToday.getText().toString(),detailTime,isPay?-1:1,
-                            Double.valueOf(binding.etInput.getText().toString()),adapter.getItem(lastPosition).getName(),userTip);
+                    CreateEntity createEntity = new CreateEntity(binding.tvToday.getText().toString(), detailTime, isPay ? -1 : 1,
+                            Double.valueOf(binding.etInput.getText().toString()), adapter.getItem(lastPosition).getName(), userTip);
+                    viewModel.insertCreateEntity(createEntity);
                     break;
             }
         }
