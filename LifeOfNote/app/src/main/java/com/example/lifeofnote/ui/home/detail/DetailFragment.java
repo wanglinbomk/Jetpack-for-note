@@ -12,11 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.lifeofnote.R;
+import com.example.lifeofnote.adapter.HomeAdapter;
 import com.example.lifeofnote.base.APP;
 import com.example.lifeofnote.databinding.DetailFragmentBinding;
+import com.example.lifeofnote.db.create.CreateEntity;
 import com.example.lifeofnote.db.time.SelectTimeEntity;
 import com.example.lifeofnote.db.type.MoneyTypeEntity;
 import com.example.lifeofnote.ui.home.create.CreateActivity;
@@ -29,12 +34,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 public class DetailFragment extends Fragment {
 
     private boolean isPAY = false;
     private boolean isShowing = false;
     private DetailViewModel mViewModel;
     private DetailFragmentBinding binding;
+    private HomeAdapter adapter;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -50,12 +58,27 @@ public class DetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(getActivity()).get(DetailViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
         binding.setDateilViewModel(mViewModel);
         binding.setLifecycleOwner(getActivity());
         EventBus.getDefault().register(this);
         initViews();
         setListener();
+        initObservice();
+    }
+
+    private void initObservice() {
+        mViewModel.getCreateDate(Integer.parseInt(DateTimeUtils.getServenEnData().replaceAll("-", ""))
+                , Integer.parseInt(DateTimeUtils.getEnDate().replaceAll("-", ""))).observe(this, new Observer<List<CreateEntity>>() {
+            @Override
+            public void onChanged(List<CreateEntity> createEntities) {
+                if (adapter == null) {
+                    adapter = new HomeAdapter(createEntities, LayoutInflater.from(APP.get()));
+                    binding.rvAllData.setLayoutManager(new LinearLayoutManager(APP.get()));
+                    binding.rvAllData.setAdapter(adapter);
+                }
+            }
+        });
     }
 
     private void initViews() {
@@ -101,6 +124,25 @@ public class DetailFragment extends Fragment {
         }
     };
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoneyTypeEntity(MoneyTypeEntity moneyTypeEntity) {
+        binding.tvCurrType.setText(moneyTypeEntity.getName());
+        ToastMaster.toast(moneyTypeEntity.getName());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSelectTime(SelectTimeEntity selectTimeEntity) {
+        String temp = selectTimeEntity.getName();
+        temp.replace("月", "");
+        binding.tvSelectTime.setText(DateTimeUtils.getCnNotYearDate());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
     private void playAnim() {
         if (!isShowing) {
             isShowing = !isShowing;
@@ -127,24 +169,5 @@ public class DetailFragment extends Fragment {
             animatorSet.playTogether(objectAnimator, objectAnimator2, objectAnimator1, objectAnimator4);
             animatorSet.start();
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMoneyTypeEntity(MoneyTypeEntity moneyTypeEntity) {
-        binding.tvCurrType.setText(moneyTypeEntity.getName());
-        ToastMaster.toast(moneyTypeEntity.getName());
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSelectTime(SelectTimeEntity selectTimeEntity) {
-        String temp = selectTimeEntity.getName();
-        temp.replace("月", "");
-        binding.tvSelectTime.setText(DateTimeUtils.getCnNotYearDate());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }

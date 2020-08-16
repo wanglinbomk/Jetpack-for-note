@@ -8,20 +8,31 @@ public class CreateEntity {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String day;
+    private int day;
     private String time;
     private int type;
     private double money;
     private String typeName;
     private String tip;
+    private String showDay;
 
-    public CreateEntity(String day, String time, int type, double money, String typeName, String tip) {
+
+    public CreateEntity(int day, String time, int type, double money, String typeName, String tip,String showDay) {
         this.day = day;
         this.time = time;
         this.type = type;
         this.money = money;
         this.typeName = typeName;
         this.tip = tip;
+        this.showDay = showDay;
+    }
+
+    public String getShowDay() {
+        return showDay;
+    }
+
+    public void setShowDay(String showDay) {
+        this.showDay = showDay;
     }
 
     public int getId() {
@@ -32,11 +43,11 @@ public class CreateEntity {
         this.id = id;
     }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(int day) {
         this.day = day;
     }
 

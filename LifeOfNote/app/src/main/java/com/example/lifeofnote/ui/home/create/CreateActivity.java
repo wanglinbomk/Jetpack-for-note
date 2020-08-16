@@ -11,6 +11,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
@@ -211,8 +212,11 @@ public class CreateActivity extends AppCompatActivity {
                     inputDialog.showDialog();
                     break;
                 case R.id.bt_config:
-                    CreateEntity createEntity = new CreateEntity(binding.tvToday.getText().toString(), detailTime, isPay ? -1 : 1,
-                            Double.valueOf(binding.etInput.getText().toString()), adapter.getItem(lastPosition).getName(), userTip);
+                    CreateEntity createEntity = new CreateEntity(Integer.parseInt(DateTimeUtils.getYear()+binding.tvToday.getText().toString()
+                            .replaceAll("月","").replaceAll("日","")),
+                            detailTime, isPay ? -1 : 1,
+                            Double.valueOf(binding.etInput.getText().toString()), adapter.getItem(lastPosition).getName(),
+                            userTip, binding.tvToday.getText().toString());
                     viewModel.insertCreateEntity(createEntity);
                     break;
             }

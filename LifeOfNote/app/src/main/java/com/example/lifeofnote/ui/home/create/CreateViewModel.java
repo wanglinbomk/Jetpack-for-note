@@ -1,6 +1,7 @@
 package com.example.lifeofnote.ui.home.create;
 
 import android.app.Application;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -57,6 +58,8 @@ public class CreateViewModel extends AndroidViewModel {
     }
 
     public void insertCreateEntity(CreateEntity createEntity){
+        Log.i("xyz",createEntity.getDay()+"");
+        Log.i("xyz",createEntity.getShowDay()+"");
       createRepository.insertCreateEntity(createEntity);
     }
 

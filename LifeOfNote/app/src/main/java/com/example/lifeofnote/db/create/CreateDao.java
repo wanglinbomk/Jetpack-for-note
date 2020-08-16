@@ -23,6 +23,9 @@ public interface CreateDao {
     @Query("SELECT * FROM CREATEENTITY WHERE type = (:type)")
     LiveData<List<CreateEntity>> getCreateByType(int type);
 
+    @Query("SELECT * FROM CREATEENTITY WHERE CREATEENTITY.day BETWEEN (:startTime) AND (:endTime)")
+    LiveData<List<CreateEntity>> getHomeDay(int startTime, int endTime);
+
    /* @Update
     void updateCreate(CreateEntity... createEntity);*/
 }

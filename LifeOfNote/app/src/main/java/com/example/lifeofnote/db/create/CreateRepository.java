@@ -32,6 +32,13 @@ public class CreateRepository {
         return createEntity;
     }
 
+    //获取记录
+    public LiveData<List<CreateEntity>> getHomeData(int startTime, int endTime){
+        createEntity = createDao.getHomeDay(startTime, endTime);
+        return createEntity;
+    }
+
+
     //创建记录
     public void insertCreateEntity(CreateEntity createEntiy){
         new InsertCreateEntity(createDao).execute(createEntiy);

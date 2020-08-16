@@ -20,6 +20,7 @@ public class DateTimeUtils {
 
     private static SimpleDateFormat enLongDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     private static SimpleDateFormat enDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    private static SimpleDateFormat enYear = new SimpleDateFormat("yyyy", Locale.getDefault());
     private static SimpleDateFormat enNotYearDateFormat = new SimpleDateFormat("MM-dd", Locale.getDefault());
     private static SimpleDateFormat enLongTimeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
     private static SimpleDateFormat enShortTimeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -36,6 +37,22 @@ public class DateTimeUtils {
     public static final int MONTH = 1;
     public static final int YEAR = 2;
 
+
+
+
+    //获取过去7天的时间
+    public static String getServenEnData(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DATE, - 7);
+        Date d = c.getTime();
+        String day = enDateFormat.format(d);
+        return day;
+    }
+
+    public static String getYear(){
+        return enYear.format(new Date());
+    }
 
     // 获取当前日期时间，格式：2016-11-24 23:33:33
     public static String getEnLongDateTime() {
