@@ -16,7 +16,6 @@ public class CreateEntity {
     private String tip;
     private String showDay;
 
-
     public CreateEntity(int day, String time, int type, double money, String typeName, String tip,String showDay) {
         this.day = day;
         this.time = time;

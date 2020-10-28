@@ -1,13 +1,12 @@
 package com.example.lifeofnote.ui.home.detail;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.lifeofnote.db.create.CreateEntity;
+import com.example.lifeofnote.db.create.CreateGroupEntity;
 import com.example.lifeofnote.db.create.CreateRepository;
 
 import java.util.List;
@@ -20,10 +19,7 @@ public class DetailViewModel extends AndroidViewModel {
         createRepository = new CreateRepository(application.getApplicationContext());
     }
 
-    public LiveData<List<CreateEntity>> getCreateDate(int startTime, int endTime) {
-        Log.i("xyz","create"+startTime);
-        Log.i("xyz","end"+endTime);
+    public LiveData<List<CreateGroupEntity>> getCreateDate(int startTime, int endTime) {
         return (createRepository.getHomeData(startTime-1,endTime+1));
     }
-
 }

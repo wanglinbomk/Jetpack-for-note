@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreateRepository {
     private LiveData<List<CreateEntity>> createEntity;
-
+    private LiveData<List<CreateGroupEntity>> createCroupEntity;
     private CreateDao createDao;
 
     public CreateRepository(Context context) {
@@ -33,9 +33,9 @@ public class CreateRepository {
     }
 
     //获取记录
-    public LiveData<List<CreateEntity>> getHomeData(int startTime, int endTime){
-        createEntity = createDao.getHomeDay(startTime, endTime);
-        return createEntity;
+    public LiveData<List<CreateGroupEntity>> getHomeData(int startTime, int endTime){
+        createCroupEntity = createDao.getHomeDay(startTime, endTime);
+        return createCroupEntity;
     }
 
 

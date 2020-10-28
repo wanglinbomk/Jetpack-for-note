@@ -22,6 +22,7 @@ import com.example.lifeofnote.adapter.HomeAdapter;
 import com.example.lifeofnote.base.APP;
 import com.example.lifeofnote.databinding.DetailFragmentBinding;
 import com.example.lifeofnote.db.create.CreateEntity;
+import com.example.lifeofnote.db.create.CreateGroupEntity;
 import com.example.lifeofnote.db.time.SelectTimeEntity;
 import com.example.lifeofnote.db.type.MoneyTypeEntity;
 import com.example.lifeofnote.ui.home.create.CreateActivity;
@@ -69,9 +70,9 @@ public class DetailFragment extends Fragment {
 
     private void initObservice() {
         mViewModel.getCreateDate(Integer.parseInt(DateTimeUtils.getServenEnData().replaceAll("-", ""))
-                , Integer.parseInt(DateTimeUtils.getEnDate().replaceAll("-", ""))).observe(this, new Observer<List<CreateEntity>>() {
+                , Integer.parseInt(DateTimeUtils.getEnDate().replaceAll("-", ""))).observe(this, new Observer<List<CreateGroupEntity>>() {
             @Override
-            public void onChanged(List<CreateEntity> createEntities) {
+            public void onChanged(List<CreateGroupEntity> createEntities) {
                 if (adapter == null) {
                     adapter = new HomeAdapter(createEntities, LayoutInflater.from(APP.get()));
                     binding.rvAllData.setLayoutManager(new LinearLayoutManager(APP.get()));

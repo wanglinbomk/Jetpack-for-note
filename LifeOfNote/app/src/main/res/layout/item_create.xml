@@ -3,11 +3,12 @@
 <layout>
     <data>
         <variable
-            name="createEntity"
+            name="createGroupEntity"
             type="com.example.lifeofnote.db.create.CreateEntity" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@drawable/bg_default_color"
         android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/distance_18dp"
                         android:textColor="#000"
-                        android:text="@{createEntity.showDay}"
+                        android:text="@{createGroupEntity.showDay}"
                         android:textStyle="bold"
                         android:layout_marginRight="@dimen/distance_4dp"
                         android:layout_marginLeft="@dimen/distance_12dp"

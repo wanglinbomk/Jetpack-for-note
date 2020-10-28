@@ -13,16 +13,17 @@ import com.example.lifeofnote.R;
 import com.example.lifeofnote.base.BindingItemClick;
 import com.example.lifeofnote.base.BindingViewHolder;
 import com.example.lifeofnote.db.create.CreateEntity;
+import com.example.lifeofnote.db.create.CreateGroupEntity;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<BindingViewHolder> {
 
-    private List<CreateEntity> datas;
+    private List<CreateGroupEntity> datas;
     private final LayoutInflater inflater;
     private BindingItemClick bindingItemClick;
 
-    public HomeAdapter(List<CreateEntity> datas, LayoutInflater inflater) {
+    public HomeAdapter(List<CreateGroupEntity> datas, LayoutInflater inflater) {
         this.datas = datas;
         this.inflater = inflater;
     }
@@ -36,7 +37,7 @@ public class HomeAdapter extends RecyclerView.Adapter<BindingViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder holder, final int position) {
-        holder.get().setVariable(BR.createEntity, datas.get(position));
+        holder.get().setVariable(BR.createGroupEntity, datas.get(position));
         holder.get().executePendingBindings();
         holder.itemView.setOnClickListener(v -> bindingItemClick.onBindingItemCLick(datas.get(position)));
     }
